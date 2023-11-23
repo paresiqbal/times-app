@@ -1,24 +1,44 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
-  const [article, setArticle] = useState([]);
-  const [term, setTerm] = useState("everyting");
-  const [isLoading, setisLoading] = useState(true);
+  const [articles, setArticles] = useState([]);
+  const [term, setTerm] = useState("everything");
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    try {
-      const fetchArticle = async () => {
+    const fetchArticle = async () => {
+      try {
         const res = await fetch(
-          `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${term}&api-key=${process.env.API_KEY}`
+          `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${term}&api-key=${
+            import.meta.env.VITE_API_KEY
+          }`
         );
-      };
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+
+        const data = await res.json();
+        setArticles(data.response.docs); // Assuming 'docs' holds the articles data
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error);
+        setIsLoading(false);
+      }
+    };
+
+    fetchArticle();
+  }, [term]);
+
   return (
     <div>
       <h1>Hello World</h1>
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <ul>
+          {articles.map((article, index) => (
+            <li key={index}>{article.headline.main}</li>
+            // Adjust the key and data properties according to the structure of the article data
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
