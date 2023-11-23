@@ -1,4 +1,5 @@
 times-app
+
 Description: This app is built with React, Tailwind CSS, and Vite to showcase news articles using the New York Times API.
 
 Features
