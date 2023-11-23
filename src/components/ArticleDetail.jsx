@@ -23,12 +23,12 @@ export default function ArticleDetail({ article }) {
   return (
     <div>
       <article
-        className="bg-white p-4 rounded shadow cursor-pointer"
+        className="bg-white p-4 rounded shadow cursor-pointer hover:text-cyan-600"
         onClick={openArticleInNewTab}
       >
-        <h2 className="text-xl font-semibold mb-2">{articleTitle}</h2>
-        <p className="text-gray-600 mb-2">{author}</p>
-        <p className="text-gray-500 mb-2">{formattedDate}</p>
+        <h2 className="text-xl font-semibold mb-2 ">{articleTitle}</h2>
+        <p className="mb-2">{author}</p>
+        <p className="mb-2 text-gray-600">{formattedDate}</p>
         <p>{abstract}</p>
       </article>
     </div>

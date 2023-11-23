@@ -35,30 +35,34 @@ function App() {
 
   useEffect(() => {
     fetchArticles();
-  }, []); // Fetch articles on initial load
+  }, []);
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6">NY Times Articles</h1>
+    <div className="container mx-auto p-4 text-gray-900">
+      <div className="flex justify-between">
+        <h1 className="text-3xl font-bold mb-6 underline">
+          New York Times Articles
+        </h1>
 
-      {/* Search Form */}
-      <form onSubmit={handleSearchSubmit} className="mb-4">
-        <input
-          type="text"
-          placeholder="Enter search term..."
-          value={searchTerm}
-          onChange={handleSearchChange}
-          className="border p-2 rounded mr-2"
-        />
-        <button
-          type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded"
-        >
-          Search
-        </button>
-      </form>
+        {/* Search Form input */}
+        <form onSubmit={handleSearchSubmit} className="mb-4">
+          <input
+            type="text"
+            placeholder="Search Article's"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            className="border p-2 rounded-full mr-2"
+          />
+          <button
+            type="submit"
+            className="bg-cyan-500 text-white px-4 py-2 rounded-full"
+          >
+            Search
+          </button>
+        </form>
+      </div>
 
-      {/* Article Display */}
+      {/* Article */}
       {isLoading ? (
         <p>Loading...</p>
       ) : (
